@@ -1,0 +1,11 @@
+<section class="home">
+    <div class="login">
+        <h1>Hello Chat App</h1>
+        <h2>created by lseguin</h2>
+        <form ng-submit="perform()">
+            <cropper alt="select picture" edit="crop()" base64="picture" default="images/nopicture.svg"></cropper>
+            <input ng-model="username" type="input" placeholder="Choice username" />
+            <input ng-disabled="picture == null || username == ''" type="submit" value="join chat" />
+        </form>
+    </div>
+</section>

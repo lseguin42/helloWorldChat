@@ -1,0 +1,15 @@
+.cropper .cropper-container {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.cropper .cropper-file {
+    display: none;
+}
+.cropper .cropper-image {
+    width: 100%;
+    height: 100%;
+}

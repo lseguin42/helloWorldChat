@@ -1,0 +1,49 @@
+<html>
+    <head>
+      <!-- build:css app.js -->
+      
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/cropper/dist/cropper.css">
+      <!-- endinject -->
+      
+      <!-- inject:css -->
+      <link rel="stylesheet" href="views/chat/chat.css">
+      <link rel="stylesheet" href="views/home/home.css">
+      <link rel="stylesheet" href="directives/cropper/cropper.css">
+      <!-- endinject -->
+      
+      <!-- endbuild app.js -->
+    </head>
+    <body ng-app="helloWorldChat">
+        
+        <div ui-view>
+        </div>
+        
+        <!-- build:js app.js -->
+        
+        <!-- bower:js -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular-websql/angular-websql.min.js"></script>
+        <script src="bower_components/cropper/dist/cropper.js"></script>
+        <!-- endinject -->
+        
+        <!-- inject:js -->
+        <script src="app.js"></script>
+        <script src="views/chat/chat.controller.js"></script>
+        <script src="views/chat/chat.js"></script>
+        <script src="views/home/home.controller.js"></script>
+        <script src="views/home/home.js"></script>
+        <script src="directives/cropper/cropper.directive.js"></script>
+        <script src="services/chat/chat.js"></script>
+        <script src="services/database/database.js"></script>
+        <script src="services/user/user.js"></script>
+        <script src="filters/blob.js"></script>
+        <script src="filters/capitalize.js"></script>
+        <!-- endinject -->
+        
+        <!-- endbuild app.js -->
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<nav layout="row">
+    <div flex=2>
+        <p>Bonjour, <span class="username">{{ User.username | capitalize }}</span>.</p>
+    </div>
+    <div class="picture" flex=1>
+        <img src="{{ User.picture }}" />
+    </div>
+</nav>
+
+<div class="main" layout="column">
+    <section flex="1" class="messages" scroll-glue>
+        <span ng-repeat="message in Chat.messages">
+            <div ng-click="toggleDetails($index)"
+                 ng-class="{ 'from-me' : message.user_id == User.id, 'from-them' : message.user_id != User.id, 'same-next': isSameNext($index) || $last, 'show-details': currentDetails == $index }">
+                <img ng-if="message.user_id != User.id" title="{{ Chat.usernameOf(message.user_id) }}" ng-show="!isSameNext($index)" src="{{ Chat.pictureOf(message.user_id) }}" />
+                <p>{{message.text}}</p>
+                <div class="details">
+                    <p>{{message.date | date : 'd/M/yyyy HH:mm:ss'}}</p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </span>
+    </section>
+</div>
+
+<div class="writer">
+    <form layout="row" ng-submit="sendMessage()">
+        <input flex="1" ng-model="message" type="text" placeholder="Ecrire un message..." />
+        <input type="submit" value="Envoyer" />
+    </form>
+</div>

@@ -1,0 +1,61 @@
+section.home {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+section.home .login {
+    position: absolute;
+    top:100px;
+    left:50%;
+
+    width: 400px;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 60px 120px;
+}
+
+section.home .login h1,
+section.home .login h2 {
+    font-size: 35px;
+    margin: 0;
+    padding: 0;
+}
+section.home .login h2 {
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(0,0,0,0.2);
+    font-weight: 300;
+}
+
+section.home form {
+    margin-top: 40px;
+    text-align: center;
+}
+
+section.home .login input[type=input] {
+    margin-top: 20px;
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+section.home .login input[type=submit] {
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 15px 60px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 18px;
+    background-color: #0B93F6;
+}
+section.home .login input[type=submit]:hover {
+    opacity: 0.8;
+}
+section.home .login input[type=submit]:disabled {
+    background-color: rgba(0,0,0,0.2);
+    opacity: 1;
+}
+
