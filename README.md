@@ -3,10 +3,16 @@ HelloWorldChat
 
 Hello World Chat
 
-* Install
-Install developpment tools, and compilation tools
+* Let's go now !
 ```
-npm install --only=dev
+npm install && npm run preview
+```
+
+## Détails
+
+* Install developpment tools, and compilation tools
+```
+npm install
 ```
 
 * Run static web server (http-server).

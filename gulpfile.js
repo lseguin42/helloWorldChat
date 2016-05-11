@@ -9,6 +9,7 @@ var debug      = require('gulp-debug');
 var cssmin     = require('gulp-cssmin');
 var os         = require('os');
 var open       = require('gulp-open');
+var rev        = require('gulp-rev');
 var angularTemplateCache = require('gulp-angular-templatecache');
 
 var srcs = [
@@ -18,6 +19,15 @@ var srcs = [
 	'services/**/*.js',
 	'filters/**/*.js'
 ];
+var templates = [
+	'views/**/*.html',
+	'directives/**/*.html'
+];
+var others = [
+	'images{,/*}'
+]
+
+var browserConfig = null;
 
 var browser = os.platform() === 'linux' ? 'google-chrome' : (
  			  os.platform() === 'darwin' ? 'google chrome' : 'chrome');
@@ -50,46 +60,32 @@ gulp.task('watch', ['inject'], function () {
 	});
 });
 
-gulp.task('build', ['minify'], function () {
-
-	return gulp.src('index.html')
-		.pipe(inject(gulp.src(['dist/app.js', 'dist/style.css'], { read: true })
-			             .pipe(debug({title: 'inject'})), {
-			name: 'build',
-			ignorePath: 'dist/',
-			addRootSlash: false,
-			starttag: '<!-- {{name}}:{{ext}} -->',
-			endtag: '<!-- endbuild -->'
-		}))
-		.pipe(debug({title: 'index'}))
-		.pipe(gulp.dest('dist'))
-		.pipe(open({ app: browser }));
-})
+/**
+ * 
+ */
+gulp.task('preview', function () {
+	browserConfig = { app: browser };
+	return gulp.start('build');
+});
 
 /**
  * 
  */
-gulp.task('minify', function () {
-	
-	var templates = [
-		'views/**/*.html',
-		'directives/**/*.html'
-	];
-	var others = [
-		'images{,/*}'
-	]
-	
-	var filterViews      = filter('views/**/*.html', { restore: true });
+gulp.task('build', function () {
+
+	var filterViews      = filter('views/**/*.html',      { restore: true });
 	var filterDirectives = filter('directives/**/*.html', { restore: true });
-	var filterJs         = filter('**/*.js', { restore: true });
-	var filterCss        = filter('**/*.css', { restore: true });
+	var filterJs         = filter('**/*.js',              { restore: true });
+	var filterCss        = filter('**/*.css',             { restore: true });
+	
+	var filterInjected   = filter('**/*.{css,js}',        { restore: false });
 
 	var files  = bowerFiles()
 				 .concat(srcs)
 				 .concat(templates)
 				 .concat(others);
 	
-	return gulp.src(files)
+	var injected = gulp.src(files)
 		.pipe(filterViews)
 			.pipe(debug({title: 'views'}))
 			.pipe(angularTemplateCache({
@@ -108,15 +104,37 @@ gulp.task('minify', function () {
 			.pipe(debug({title: 'css'}))
 			.pipe(concat('style.css'))
 			.pipe(cssmin())
+			.pipe(debug({title: 'cssmin'}))
+			.pipe(rev())
+			.pipe(debug({title: 'revcss'}))
 		.pipe(filterCss.restore)
 		.pipe(filterJs)
 			.pipe(debug({title: 'javascript'}))
+			.pipe(concat('app.js'))
 			.pipe(uglify())
 			.pipe(debug({title: 'uglify'}))
-			.pipe(concat('app.js'))
+			.pipe(rev())
+			.pipe(debug({title: 'revjs'}))
 		.pipe(filterJs.restore)
 		.pipe(debug({title: 'build'}))
+		.pipe(gulp.dest('dist'))
+		.pipe(filterInjected)
+			.pipe(debug({ title: 'inject' }));
+
+	var app = gulp.src('index.html')
+		.pipe(inject(injected, {
+			name: 'build',
+			ignorePath: 'dist/',
+			addRootSlash: false,
+			starttag: '<!-- {{name}}:{{ext}} -->',
+			endtag: '<!-- endbuild -->'
+		}))
+		.pipe(debug({title: 'index'}))
 		.pipe(gulp.dest('dist'));
+	
+	if (browserConfig)
+		return app.pipe(open(browserConfig));
+	return app;
 });
 
 gulp.task('default', ['watch']);
