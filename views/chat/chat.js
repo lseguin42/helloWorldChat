@@ -1,5 +1,5 @@
 angular.module('helloWorldChat')
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
         .state('chat', {
             requireAuth: true,
@@ -15,4 +15,4 @@ angular.module('helloWorldChat')
                 }]
             }
         })
-    });
+    }]);

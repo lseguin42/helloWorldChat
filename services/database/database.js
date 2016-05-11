@@ -6,21 +6,19 @@ angular.module('helloWorldChat')
      */
     var database = $webSql.openDatabase('helloWorldChatDB', '1.0', 'Test DB', 2 * 1024 * 1024);
 
-    var tableUsers = `
-            CREATE TABLE users (
-                id INTEGER not null primary key AUTOINCREMENT,
-                username TEXT not null UNIQUE,
-                picture TEXT not null
-            );
-        `
-    var tableMessages = `
-            CREATE TABLE messages (
-                id INTEGER not null primary key AUTOINCREMENT,
-                user_id INTEGER not null REFERENCES users(id), 
-                text TEXT not null,
-                date INTEGER not null
-            );
-        `
+    var tableUsers = 
+            'CREATE TABLE users (' +
+            '    id INTEGER not null primary key AUTOINCREMENT,' +
+            '    username TEXT not null UNIQUE,' +
+            '    picture TEXT not null' +
+            ')';
+    var tableMessages = 
+            'CREATE TABLE messages (' +
+            '    id INTEGER not null primary key AUTOINCREMENT,' +
+            '    user_id INTEGER not null REFERENCES users(id),'  +
+            '    text TEXT not null,' +
+            '   date INTEGER not null' +
+            ')';
     try {
        database.executeQuery(tableUsers);
        database.executeQuery(tableMessages);

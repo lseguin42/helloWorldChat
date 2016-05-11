@@ -1,5 +1,6 @@
 angular.module('helloWorldChat')
-    .controller('HomeCtrl', ['$state', '$scope', 'Database', function ($state, $scope, Database) {        
+    .controller('HomeCtrl', ['$state', '$scope', 'Database',
+    function ($state, $scope, Database) {        
         
         var UserModel = Database.table('users');
         

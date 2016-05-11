@@ -1,5 +1,5 @@
 angular.module('helloWorldChat')
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         
         $stateProvider
         .state('home', {
@@ -8,4 +8,4 @@ angular.module('helloWorldChat')
             controller: 'HomeCtrl',
             controllerAs: 'vm'
         })
-    });
+    }]);
