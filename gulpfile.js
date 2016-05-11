@@ -6,6 +6,7 @@ var filter     = require('gulp-filter');
 var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
 var debug      = require('gulp-debug');
+var cssmin     = require('gulp-cssmin');
 var os         = require('os');
 var open       = require('gulp-open');
 var angularTemplateCache = require('gulp-angular-templatecache');
@@ -106,6 +107,7 @@ gulp.task('minify', function () {
 		.pipe(filterCss)
 			.pipe(debug({title: 'css'}))
 			.pipe(concat('style.css'))
+			.pipe(cssmin())
 		.pipe(filterCss.restore)
 		.pipe(filterJs)
 			.pipe(debug({title: 'javascript'}))
