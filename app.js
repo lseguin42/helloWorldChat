@@ -3,14 +3,9 @@ angular.module('helloWorldChat', [
     'angular-websql',
     'luegg.directives'
 ])
-.config(['$locationProvider', '$urlRouterProvider', '$compileProvider', function ($locationProvider, $urlRouterProvider, $compileProvider) {
+.config(['$urlRouterProvider', '$compileProvider', function ($urlRouterProvider, $compileProvider) {
     $urlRouterProvider.otherwise("/");
-    /*
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-    });
-    */
+    
     var oldWhiteList = $compileProvider.imgSrcSanitizationWhitelist();
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 }])

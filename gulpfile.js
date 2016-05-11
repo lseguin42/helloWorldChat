@@ -23,9 +23,10 @@ var templates = [
 	'views/**/*.html',
 	'directives/**/*.html'
 ];
-var others = [
-	'images{,/*}'
-]
+var assets = [
+	'images{,/*,**/*}'
+];
+var extensions = [];
 
 var browserConfig = null;
 
@@ -64,8 +65,14 @@ gulp.task('watch', ['inject'], function () {
  * 
  */
 gulp.task('preview', function () {
-	browserConfig = { app: browser };
-	return gulp.start('build');
+	extensions.push('extensions/html5.js');
+	browserConfig = {
+		uri: 'http://localhost:8080',
+  		already: false,
+		app: browser
+    };
+	gulp.start('build');
+	require('./serve.js');
 });
 
 /**
@@ -83,7 +90,8 @@ gulp.task('build', function () {
 	var files  = bowerFiles()
 				 .concat(srcs)
 				 .concat(templates)
-				 .concat(others);
+				 .concat(assets)
+				 .concat(extensions);
 	
 	var injected = gulp.src(files)
 		.pipe(filterViews)

@@ -8,19 +8,19 @@ Hello World Chat
 npm install && npm run preview
 ```
 
-## Détails
+## More informations
 
 * Install developpment tools, and compilation tools
 ```
 npm install
 ```
 
-* Run static web server (http-server).
+* Run a simple static web server (html5Mode)
 ```
-npm run http-server
+npm run preview
 ```
 
-* Or without serveur, build required.
+* Or, you can just build app without serveur.
 ```
 npm run build
 ```
