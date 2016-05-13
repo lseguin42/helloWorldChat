@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node_modules/bower/bin/bower install",
-    "build": "rm -rf dist; node_modules/gulp/bin/gulp.js build",
-    "preview": "rm -rf dist; node_modules/gulp/bin/gulp.js preview"
+    "postinstall": "node node_modules/bower/bin/bower install",
+    "build": "rm -rf dist; node node_modules/gulp/bin/gulp.js build",
+    "preview": "rm -rf dist; node node_modules/gulp/bin/gulp.js preview"
   },
   "author": "Lionel Seguin <lseguin@student.42.fr>",
   "license": "MIT",
